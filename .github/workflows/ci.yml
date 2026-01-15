@@ -17,9 +17,8 @@ jobs:
       - name: Install basic dependencies
         run: |
           apt-get update
-          apt-get install -y git curl make lcov
-          curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-          apt-get install -y nodejs
+          apt-get install -y git curl cmake make lcov
+          apt-get install -y build-essential
 
       - name: "Checkout the repository"
         uses: actions/checkout@v4
@@ -47,11 +46,11 @@ jobs:
           lcov --capture --directory build --output-file reports/coverage.info
           genhtml coverage.info --output-directory reports/coverage_html
 
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
           files: ./junit-results.xml
 
       - name: Upload coverage report to Codecov
