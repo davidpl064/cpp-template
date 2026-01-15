@@ -8,6 +8,8 @@
 /Makefile
 /compile_commands.json
 /*.cmake.user
+CMakeUserPresets.json
+test_package/build
 
 # Executables
 *.exe
