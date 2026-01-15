@@ -4,7 +4,7 @@
 PROJECT_NAME := cpp_template
 PACKAGE_NAME := cpp-template
 PROJECT_VERSION := $(shell git tag --sort=-v:refname | head -n1 | sed 's/^v//')
-CMAKE_BUILD_TYPE ?= Release
+CMAKE_BUILD_TYPE ?= Debug
 SRC_DIR := ${PROJECT_NAME}/src
 INCLUDE_DIR := ${PROJECT_NAME}/include
 TESTS_DIR := tests
