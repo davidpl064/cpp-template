@@ -80,7 +80,13 @@ class CppTemplateRecipe(ConanFile):
 
             # self.run(test_folder/"unit_tests")
             # self.run(test_folder/"integration_tests")
-            self.run("ctest --output-on-failure", cwd=self.build_folder)
+            if self.options.with_cov:
+                path_reports = Path(self.build_folder).resolve()/"reports"
+                path_reports.mkdir(parents=True, exist_ok=True)
+
+                self.run("ctest --output-on-failure --output-junit reports/junit-results.xml", cwd=self.build_folder)
+            else:
+                self.run("ctest --output-on-failure", cwd=self.build_folder)
 
     def validate(self):
         if self.settings.os == "Macos" and self.settings.arch == "armv8":

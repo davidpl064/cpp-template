@@ -32,9 +32,9 @@ lock:  ## lock dependencies
 	$(CONAN) lock create .
 
 test:  ## run tests
-	ctest --test-dir $(BUILD_DIR) --output-on-failure
+	ctest --test-dir $(BUILD_DIR)/$(CMAKE_BUILD_TYPE) --output-on-failure
 test-cov:  ## run tests with coverage reports
-	ctest --test-dir $(BUILD_DIR) --output-on-failure --test-output-junit junit-results.xml
+	ctest -V --test-dir $(BUILD_DIR)/Debug --output-on-failure --output-junit junit-results.xml
 
 run:  ## run main executable
 	$(BUILD_DIR)/$(PROJECT_NAME)

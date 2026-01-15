@@ -17,7 +17,7 @@ jobs:
       - name: Install basic dependencies
         run: |
           apt-get update
-          apt-get install -y git curl cmake make lcov
+          apt-get install -y git curl cmake make lcov clang-tidy clang-format
           apt-get install -y build-essential
 
       - name: "Checkout the repository"
@@ -45,28 +45,27 @@ jobs:
 
       - name: Generate report using lcov
         run: |
-          mkdir -p reports
-          lcov --capture --directory build --output-file reports/coverage.info
-          genhtml coverage.info --output-directory reports/coverage_html
+          lcov --capture --directory build --output-file build/Debug/reports/coverage.info
+          genhtml coverage.info --output-directory build/Debug/reports/coverage_html
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           report_type: test_results
-          files: ./junit-results.xml
+          files: ./build/Debug/reports/junit-results.xml
 
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./reports/coverage.info
+          files: ./build/Debug/reports/coverage.info
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         with:
           name: cov-summary
-          path: reports/coverage_html
+          path: build/Debug/reports/coverage_html
           if-no-files-found: error
 
   # security:
