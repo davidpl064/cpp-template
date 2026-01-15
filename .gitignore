@@ -1,0 +1,75 @@
+# ===================================================
+# Build artifacts (CMake / general)
+# ===================================================
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+/compile_commands.json
+/*.cmake.user
+CMakeUserPresets.json
+test_package/build
+
+# Executables
+*.exe
+*.out
+*.app
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+
+# Object files
+*.o
+*.obj
+*.lo
+*.la
+*.lai
+*.slo
+
+# Dependency files
+*.d
+
+# ===================================================
+# Editor / IDE files
+# ===================================================
+# VSCode
+*.code-workspace
+
+# CLion / JetBrains
+.idea/
+*.iml
+
+# Visual Studio
+*.VC.db
+*.VC.VC.opendb
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Xcode
+*.xcworkspace
+*.xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# ===================================================
+# OS-generated files
+# ===================================================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# ===================================================
+# Logs, temp files
+# ===================================================
+*.log
+*.tmp
+*.swp
+*.bak
