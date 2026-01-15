@@ -1,0 +1,45 @@
+{
+    "version": 3,
+    "vendor": {
+        "conan": {}
+    },
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 15,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "conan-release",
+            "displayName": "'conan-release' config",
+            "description": "'conan-release' configure using 'Unix Makefiles' generator",
+            "generator": "Unix Makefiles",
+            "cacheVariables": {
+                "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
+                "CMAKE_BUILD_TYPE": "Release"
+            },
+            "environment": {
+                "PATH": "/home/dplamarca/.conan2/p/cmake25c93bd00d216/p/bin:$penv{PATH}"
+            },
+            "cmakeExecutable": "/home/dplamarca/.conan2/p/cmake25c93bd00d216/p/bin/cmake",
+            "toolchainFile": "generators/conan_toolchain.cmake",
+            "binaryDir": "/mnt/c/Users/David/Documents/ProjectsVault/cpp-template/test_package/build/Release"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "conan-release",
+            "configurePreset": "conan-release",
+            "jobs": 32
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "conan-release",
+            "configurePreset": "conan-release",
+            "execution": {
+                "jobs": 32
+            }
+        }
+    ]
+}

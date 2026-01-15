@@ -1,0 +1,1 @@
+. "/mnt/c/Users/David/Documents/ProjectsVault/cpp-template/test_package/build/Release/generators/conanbuildenv-release-x86_64.sh"

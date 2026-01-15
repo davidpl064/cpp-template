@@ -1,0 +1,1 @@
+. "/mnt/c/Users/David/Documents/ProjectsVault/cpp-template/test_package/build/gcc-11-x86_64-17-release/generators/deactivate_conanbuildenv-release-x86_64.sh"
