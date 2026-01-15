@@ -17,7 +17,7 @@ build:
 	$(CONAN) build . --build=missing
 
 build-cov:  ## build with coverage flags
-	$(CONAN) build . --build=missing -o &:with_cov=True
+	$(CONAN) build . --build=missing -o "&:with_cov=True"
 
 build-simple:  ## build project
 	@echo "=== Installing dependencies with Conan ==="
