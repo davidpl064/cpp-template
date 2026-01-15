@@ -3,6 +3,8 @@ import os
 from conan import ConanFile
 from conan.errors import ConanInvalidConfiguration
 from conan.tools.cmake import CMake, CMakeDeps, cmake_layout, CMakeToolchain
+from conan.tools.scm import Version
+import subprocess
 
 from pathlib import Path
 
@@ -10,7 +12,6 @@ from pathlib import Path
 class CppTemplateRecipe(ConanFile):
     # Project metadata
     name = "cpp-template"
-    version = "0.1.0"
     languages = "C++"
 
     license = "MIT"
@@ -34,6 +35,14 @@ class CppTemplateRecipe(ConanFile):
         ".clang-tidy",
         "docs/*",
     )
+
+    def set_version(self):
+        git_version = subprocess.check_output(
+            ["git", "describe", "--tags", "--dirty", "--always"],
+            cwd=self.recipe_folder
+        ).decode().strip()
+
+        self.version = Version(git_version.lstrip("v"))
 
     def requirements(self):
         self.requires(

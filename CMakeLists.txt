@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.20)
+include(cmake/version.cmake)
 
 # ---------------------------------------------------------------------
 # Project metadata
 # ---------------------------------------------------------------------
 project(
     cpp_template
-    VERSION 0.1.0
+    VERSION ${PROJECT_VERSION}
     DESCRIPTION "Brief description of the C++ project."
     LANGUAGES CXX
 )
