@@ -14,7 +14,7 @@ BUILD_DIR := build
 CONAN := conan
 
 build:
-	$(CONAN) build . --build=missing
+	$(CONAN) build . --build=missing -s build_type=$(CMAKE_BUILD_TYPE)
 
 build-cov:  ## build with coverage flags
 	$(CONAN) build . --build=missing -s build_type=Debug -o "&:with_cov=True"
