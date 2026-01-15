@@ -9,7 +9,9 @@
 /compile_commands.json
 /*.cmake.user
 CMakeUserPresets.json
+
 test_package/build
+test_package/CMakeUserPresets.json
 
 # Executables
 *.exe

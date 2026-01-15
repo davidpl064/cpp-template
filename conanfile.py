@@ -22,14 +22,16 @@ class CppTemplateRecipe(ConanFile):
 
     # Binary configuration
     settings = "os", "arch", "compiler", "build_type"
-    options = {"shared": [True, False]}
-    default_options = {"shared": False}
+    options = {"shared": [True, False], "with_cov": [True, False]}
+    default_options = {"shared": False, "with_cov": False}
 
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = (
         "cpp_template/*",
         "tests/*",
+        "cmake/*",
         "CMakeLists.txt",
+        "version.txt",
         "*.md",
         ".clang-format",
         ".clang-tidy",
@@ -37,12 +39,11 @@ class CppTemplateRecipe(ConanFile):
     )
 
     def set_version(self):
-        git_version = subprocess.check_output(
-            ["git", "describe", "--tags", "--dirty", "--always"],
-            cwd=self.recipe_folder
-        ).decode().strip()
-
-        self.version = Version(git_version.lstrip("v"))
+        try:
+            with open("version.txt") as f:
+                self.version = f.read().strip()
+        except FileNotFoundError:
+            self.version = "0.0.0"
 
     def requirements(self):
         self.requires(
@@ -59,6 +60,9 @@ class CppTemplateRecipe(ConanFile):
         deps.generate()
         
         tc = CMakeToolchain(self)
+        # Inject ENABLE_COVERAGE from Conan option
+        if self.options.with_cov:
+            tc.variables["ENABLE_COVERAGE"] = True
         tc.generate()
 
     def layout(self):

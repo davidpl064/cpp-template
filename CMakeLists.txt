@@ -34,6 +34,15 @@ option(ENABLE_WARNINGS "Enable compiler warnings" ON)
 option(ENABLE_TESTS "Enable unit tests" ON)
 option(ENABLE_EXAMPLES "Build examples" ON)
 
+# Coverage option
+option(ENABLE_COVERAGE "Enable coverage" OFF)
+
+if(ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    message(STATUS "Building with coverage flags")
+    add_compile_options(--coverage -O0 -g)
+    add_link_options(--coverage)
+endif()
+
 # ---------------------------------------------------------------------
 # Compiler warnings (target-based)
 # ---------------------------------------------------------------------
