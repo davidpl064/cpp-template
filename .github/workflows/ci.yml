@@ -46,7 +46,9 @@ jobs:
       - name: Generate report using lcov
         run: |
           echo "Current lcov version: $(lcov --version)"
-          lcov --capture --directory build/Debug --output-file build/Debug/reports/coverage.info --ignore-errors mismatch
+          echo "Current GCC version: $(gcc --version)"
+          echo "Current cmake version: $(cmake --version)"
+          lcov --capture --directory build/Debug --output-file build/Debug/reports/coverage.info --ignore-errors mismatch, inconsistent
           genhtml build/Debug/reports/coverage.info --output-directory build/Debug/reports/coverage_html
 
       - name: Upload coverage report to Codecov
