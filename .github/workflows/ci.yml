@@ -34,14 +34,14 @@ jobs:
         with:
           cache_packages: true
 
-      - name: Install dependencies with coverage flags
+      - name: Install dependencies with coverage flags and run tests
         run: make build-cov
 
       - name: Format and Lint
         run: make format lint
 
-      - name: Tests using CTest
-        run: make test-cov
+      # - name: Tests using CTest
+      #   run: make test-cov
 
       - name: Generate report using lcov
         run: |
