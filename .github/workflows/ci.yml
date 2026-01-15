@@ -17,7 +17,7 @@ jobs:
       - name: Install basic dependencies
         run: |
           apt-get update
-          apt-get install -y git curl cmake make lcov clang-tidy clang-format
+          apt-get install -y git curl cmake make lcov clang-tidy clang-format gnupg
           apt-get install -y build-essential
 
       - name: "Checkout the repository"
@@ -43,11 +43,11 @@ jobs:
       # - name: Tests using CTest
       #   run: make test-cov
 
+        # echo "Current lcov version: $(lcov --version)"
+        # echo "Current GCC version: $(gcc --version)"
+        # echo "Current cmake version: $(cmake --version)"
       - name: Generate report using lcov
         run: |
-          echo "Current lcov version: $(lcov --version)"
-          echo "Current GCC version: $(gcc --version)"
-          echo "Current cmake version: $(cmake --version)"
           lcov --capture --directory build/Debug --output-file build/Debug/reports/coverage.info --ignore-errors inconsistent
           genhtml build/Debug/reports/coverage.info --output-directory build/Debug/reports/coverage_html
 
