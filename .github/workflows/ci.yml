@@ -45,7 +45,7 @@ jobs:
 
       - name: Generate report using lcov
         run: |
-          lcov --capture --directory build/Debug --output-file build/Debug/reports/coverage.info
+          lcov --capture --directory build --output-file build/Debug/reports/coverage.info
           genhtml build/Debug/reports/coverage.info --output-directory build/Debug/reports/coverage_html
 
       - name: Upload coverage report to Codecov
