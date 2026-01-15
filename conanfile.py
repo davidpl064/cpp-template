@@ -2,19 +2,29 @@ import os
 
 from conan import ConanFile
 from conan.errors import ConanInvalidConfiguration
-from conan.tools.cmake import CMake, CMakeDeps, cmake_layout
+from conan.tools.cmake import CMake, CMakeDeps, cmake_layout, CMakeToolchain
+
+from pathlib import Path
 
 
 class CppTemplateRecipe(ConanFile):
-    name = "cpp_template"
+    # Project metadata
+    name = "cpp-template"
     version = "0.1.0"
+    languages = "C++"
+
     license = "MIT"
-    author = "David Perez Lamarca <davi.perlam@gmail.com>"
-    url = "https://github.com/yourusername/cpp_template"
+    author = "David Perez Lamarca davi.perlam@gmail.com"
+    url = "https://github.com/davidpl064/cpp-template"
     description = "A modern C++ project template with CMake, Clang tooling, and testing"
-    topics = ("cpp", "template", "cmake", "conan", "clang")
+    topics = ("cpp", "template", "cmake", "conan", "clang") # tags
+
+    # Binary configuration
     settings = "os", "arch", "compiler", "build_type"
-    generators = "CMakeDeps", "CMakeToolchain"
+    options = {"shared": [True, False]}
+    default_options = {"shared": False}
+
+    # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = (
         "cpp_template/*",
         "tests/*",
@@ -25,17 +35,22 @@ class CppTemplateRecipe(ConanFile):
         "docs/*",
     )
 
-    options = {"shared": [True, False]}
-    default_options = {"shared": False}
-
     def requirements(self):
         self.requires(
-            "gtest/1.14.0",
-            "zlib/1.3.1",
+            "zlib/[~1.3]",
         )
 
     def build_requirements(self):
         self.tool_requires("cmake/3.27.9")
+
+        self.test_requires("gtest/[~1.17]")
+
+    def generate(self):
+        deps = CMakeDeps(self)
+        deps.generate()
+        
+        tc = CMakeToolchain(self)
+        tc.generate()
 
     def layout(self):
         cmake_layout(self)
@@ -44,6 +59,15 @@ class CppTemplateRecipe(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+
+        if not self.conf.get("tools.build:skip_test", default=False):
+            test_folder = Path("tests").resolve()
+            if self.settings.os == "Windows":
+                test_folder = test_folder/str(self.settings.build_type)
+
+            # self.run(test_folder/"unit_tests")
+            # self.run(test_folder/"integration_tests")
+            self.run("ctest --output-on-failure", cwd=self.build_folder)
 
     def validate(self):
         if self.settings.os == "Macos" and self.settings.arch == "armv8":
@@ -56,4 +80,4 @@ class CppTemplateRecipe(ConanFile):
     def package_info(self):
         # Provide the library name for consumers
         self.cpp_info.libs = ["cpp_template"]
-        self.cpp_info.libs = ["cpp_template"]
+        self.cpp_info.set_property("cmake_target_name", "cpp_template::cpp_template")

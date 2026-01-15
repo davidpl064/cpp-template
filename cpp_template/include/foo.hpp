@@ -1,8 +1,7 @@
 #pragma once
 
-#include <iostream>
+#include <string>
 
-// A simple test function
-inline void say_hello() {
-    std::cout << "Hello from " << __FILE__ << "!\n";
-}
+std::string hello_message(const std::string& build_type, const std::string& extra_info);
+
+void hello();
