@@ -34,11 +34,22 @@ jobs:
         with:
           cache_packages: true
 
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install python tooling
+        run: |
+          make install-python-tooling
+
       - name: Install dependencies with coverage flags and run tests
         run: make build-cov
 
       - name: Format and Lint
-        run: make format lint
+        run: |
+          pre-commit run --all-files
+          make lint
 
       # - name: Tests using CTest
       #   run: make test-cov

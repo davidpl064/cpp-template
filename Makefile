@@ -1,4 +1,4 @@
-.PHONY: help install-python build build-cov build-simple test package test_package run format lint clean
+.PHONY: help install-python-tooling build build-cov build-simple test test-cov package test_package run format lint clean
 
 # Project settings
 PROJECT_NAME := cpp_template
@@ -16,7 +16,7 @@ CONAN := conan
 GREEN_COLOR  := \033[0;32m
 RESET_COLOR  := \033[0m
 
-install-python:
+install-python-tooling:
 	uv sync --dev
 	uv run pre-commit install
 	@echo "Activate env with: $(GREEN_COLOR)source .venv/bin/activate$(RESET_COLOR)"
@@ -47,8 +47,11 @@ test-cov:  ## run tests with coverage reports
 run:  ## run main executable
 	$(BUILD_DIR)/$(PROJECT_NAME)
 
+# format:  ## format source code
+# 	clang-format -style=file -i $$(find $(SRC_DIR) $(INCLUDE_DIR) $(TESTS_DIR) -name '*.cpp' -o -name '*.hpp')
+
 format:  ## format source code
-	clang-format -style=file -i $$(find $(SRC_DIR) $(INCLUDE_DIR) $(TESTS_DIR) -name '*.cpp' -o -name '*.hpp')
+	uv run pre-commit run --all-files
 
 lint:  ## run static analysis
 	clang-tidy --config-file=.clang-tidy -p $(BUILD_DIR)/$(CMAKE_BUILD_TYPE) $$(find $(SRC_DIR) $(TESTS_DIR) -name '*.cpp')
