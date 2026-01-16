@@ -17,7 +17,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/.git")
 
     message(STATUS "Project version: ${PROJECT_VERSION}")
 
-    file(WRITE "${CMAKE_SOURCE_DIR}/version.txt" "${PROJECT_VERSION}")
+    file(WRITE "${CMAKE_SOURCE_DIR}/version.txt" "${PROJECT_VERSION}\n")
 else()
     # Package install / consumer mode — read from file or fallback
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt")
