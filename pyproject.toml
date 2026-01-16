@@ -1,0 +1,60 @@
+[dependency-groups]
+dev = [
+    "black",
+    "conan >= 2.24",
+    "flake8-pyproject",
+    "pip",
+    "pre-commit >= 4.5.1"
+]
+
+[tool.uv]
+default-groups = []
+
+[tool.black]
+line-length = 100
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 100
+max-complexity = 18
+docstring-convention = "google"
+ignore = [
+    # Exclude errors conflicting with black
+    "W503",
+    "E203",
+    # Exclude some unnecesarry errors
+    "D104",
+    "D105",
+    "D212",
+    "D200",
+    "D107",
+    "D100",
+    "D205",
+    "D415"
+]
+exclude = [
+    # No need to traverse our git directory
+    ".git",
+    # There's no value in checking cache directories
+    "__pycache__",
+    ".mpy_cache",
+    ".pytest_cache",
+]
+per-file-ignores = ["tests/*: D1"]

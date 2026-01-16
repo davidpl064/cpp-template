@@ -1,4 +1,4 @@
-.PHONY: help build build-cov build-simple test package test_package run format lint clean
+.PHONY: help install-python build build-cov build-simple test package test_package run format lint clean
 
 # Project settings
 PROJECT_NAME := cpp_template
@@ -12,6 +12,14 @@ BUILD_DIR := build
 
 # Tool settings
 CONAN := conan
+
+GREEN_COLOR  := \033[0;32m
+RESET_COLOR  := \033[0m
+
+install-python:
+	uv sync --dev
+	uv run pre-commit install
+	@echo "Activate env with: $(GREEN_COLOR)source .venv/bin/activate$(RESET_COLOR)"
 
 build:
 	$(CONAN) build . --build=missing -s build_type=$(CMAKE_BUILD_TYPE)

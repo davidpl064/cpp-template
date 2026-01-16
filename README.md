@@ -9,7 +9,7 @@ This repository aims to serve as a C++ project template, providing all necessary
 Short intro to the project (objective, scope, etc).
 
 ## Codecov
-Settings are set in the file `codecov.yml`. Check official docs for information [Codecov](https://docs.codecov.com/docs/quick-start)
+Settings are set in the file `codecov.yml`. Check official docs in [Codecov](https://docs.codecov.com/docs/quick-start).
 To validate `codecov.yml` file, execute next command:
 ```
 curl -X POST --data-binary @codecov.yml https://codecov.io/validate

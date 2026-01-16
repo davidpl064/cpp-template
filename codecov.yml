@@ -5,7 +5,7 @@ coverage:
         informational: true
         target: auto # auto compares coverage to the previous base commit
         threshold: 10% # the leniency in hitting the target
-        base: auto 
+        base: auto
     patch:
       default:
         informational: true
