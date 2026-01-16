@@ -48,7 +48,7 @@ jobs:
 
       - name: Format and Lint
         run: |
-          pre-commit run --all-files
+          make format
           make lint
 
       # - name: Tests using CTest
