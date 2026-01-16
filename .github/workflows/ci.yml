@@ -48,7 +48,15 @@ jobs:
         # echo "Current cmake version: $(cmake --version)"
       - name: Generate report using lcov
         run: |
-          lcov --capture --directory build/Debug --output-file build/Debug/reports/coverage.info --ignore-errors inconsistent
+          lcov --capture --directory build/Debug --base-directory . --output-file build/Debug/reports/coverage.info --ignore-errors inconsistent
+          lcov --remove build/Debug/reports/coverage.info \
+            '/usr/*' \
+            '*/_deps/*' \
+            '*/gtest/*' \
+            '*/googletest/*' \
+            '*/tests/*' \
+            '*/CMakeFiles/*' \
+            --output-file build/Debug/reports/coverage.info
           genhtml build/Debug/reports/coverage.info --output-directory build/Debug/reports/coverage_html
 
       - name: Upload coverage report to Codecov
