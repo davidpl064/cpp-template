@@ -26,6 +26,11 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
+      - name: "Debugging CI"
+        run: |
+          echo "Content initial CI: $(cat -A version.txt)"
+          echo "Result initial CI: $(tail -c 1 version.txt | od -An -t u1)"
+
       - name: Mark Git directory as safe (needed when using Github runners)
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
