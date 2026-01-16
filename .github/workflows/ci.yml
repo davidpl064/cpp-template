@@ -56,7 +56,8 @@ jobs:
             '*/googletest/*' \
             '*/tests/*' \
             '*/CMakeFiles/*' \
-            --output-file build/Debug/reports/coverage.info
+            --output-file build/Debug/reports/coverage.info \
+            --ignore-errors unused
           genhtml build/Debug/reports/coverage.info --output-directory build/Debug/reports/coverage_html
 
       - name: Upload coverage report to Codecov
