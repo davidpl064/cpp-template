@@ -1,6 +1,11 @@
 #include "foo.hpp"
 #include <iostream>
 
+/**
+ * @brief Main function of the app.
+ *
+ * @return int Exit code.
+ */
 int main() {
     std::cout << "=== C++ template build test ===\n";
 
