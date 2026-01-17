@@ -1,0 +1,7 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title="Template main method running app." alt="" coords="5,93,60,120"/>
+<area shape="rect" id="node2" href="$namespacetimeseries.html#af799dbd56417521506b58e2d16716f76" title="Compute the time derivate of input signal." alt="" coords="108,5,273,32"/>
+<area shape="rect" id="node3" href="$namespacetimeseries.html#ac122570a44fd7f9f1eb1a2f61deef6e6" title="Calculate moving average of input signal according to set window size." alt="" coords="117,57,265,98"/>
+<area shape="rect" id="node4" href="$namespacetimeseries.html#a61e40a5161b5ac0df7846fc5c87eb200" title="Normalize timeseries." alt="" coords="109,123,273,149"/>
+<area shape="rect" id="node5" href="$namespacetimeseries.html#a6990163b92201996626aa26a795daa19" title="Calculate root mean squared (RMS) value of a timeseries or signal." alt="" coords="129,173,253,200"/>
+</map>

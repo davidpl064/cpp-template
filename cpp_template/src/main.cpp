@@ -1,20 +1,32 @@
-#include "foo.hpp"
+#include "timeseries.hpp"
+
 #include <iostream>
 
 /**
- * @brief Main function of the app.
+ * @brief Template main method running app.
  *
- * @return int Exit code.
+ * @return int Execution code.
  */
 int main() {
-    std::cout << "=== C++ template build test ===\n";
+    std::cout << "=== C++ template app ===\n";
 
-// Call a test function from the library
-#ifdef NDEBUG
-    std::cout << hello_message("Release prueba", "without color");
-#else
-    std::cout << hello_message("Debug", "without color");
-#endif
+    std::vector<double> data{1.0, 2.0, 4.0, 7.0, 11.0};
+    int window_size = 3;
+
+    auto r = timeseries::rms(data);
+    if (r) {
+        std::cout << "RMS: " << *r << '\n';
+    }
+
+    auto avg = timeseries::moving_average(data, window_size);
+    auto deriv = timeseries::derivative(data, 1.0);
+    auto norm = timeseries::normalize(data);
+
+    std::cout << "Moving average:\n";
+    for (double v : avg) {
+        std::cout << v << " ";
+    }
+    std::cout << "\n";
 
     return 0;
 }

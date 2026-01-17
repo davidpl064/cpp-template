@@ -20,7 +20,7 @@
 add_library(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
     PRIVATE
-        src/foo.cpp
+        src/timeseries.cpp
 )
 
 # Public include directories
